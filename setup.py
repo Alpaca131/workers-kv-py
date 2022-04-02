@@ -15,7 +15,8 @@ setuptools.setup(
     url="https://github.com/Alpaca131/workers-kv-py",
     packages=setuptools.find_packages(),
     install_requires=[
-        "requests>=2.25.1"
+        "requests>=2.25.1",
+        "aiohttp>=3.8.1"
     ],
     license="MIT",
     classifiers=[
