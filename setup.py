@@ -6,5 +6,5 @@ setup(name='workers_kv.py',
       author='Alpaca131',
       author_email='contact@alpaca131.com',
       url='https://github.com/Alpaca131/workers-kv-py',
-      install_requires=['requests']
+      requires=['requests']
       )
