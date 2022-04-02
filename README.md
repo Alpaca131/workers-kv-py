@@ -4,4 +4,4 @@ You can use this to store and retrieve data from your Cloudflare Workers KV much
 
 
 ## Installation
-WIP
+`pip install -U git+https://github.com/Alpaca131/workers-kv-py.git`
