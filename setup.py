@@ -6,14 +6,17 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setuptools.setup(
     name="workers-kv.py",
-    version="1.1.2",
+    version="1.1.3",
     author="Alpaca131",
     author_email="iwa124816@gmail.com",
     description="An api wrapper of Cloudflare Workers KV for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Alpaca131/workers-kv-py",
-    packages=setuptools.find_packages(),
+    packages=[
+        "workers_kv",
+        "workers_kv.ext.async_workers_kv"
+    ],
     install_requires=[
         "requests>=2.25.1",
         "aiohttp>=3.8.1"
