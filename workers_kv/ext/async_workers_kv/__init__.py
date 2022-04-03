@@ -37,6 +37,7 @@ class Namespace:
     async def read(self, key: str):
         """
         Read a key-value pair from the namespace
+        If value is a json object, returns dict or list.
         """
         url = f"{self.request_base_url}/values/{key}"
         response = await aio_request.get(url=url, headers=self.request_headers)
@@ -46,7 +47,10 @@ class Namespace:
             # 正常時
             return response
         # エラー発生時
-        raise Exception(res_body["errors"][0]["message"])
+        if "errors" in res_body:
+            raise Exception(res_body["errors"][0]["message"])
+        else:
+            return res_body
 
     async def write(self, key_value_pairs: dict):
         """
