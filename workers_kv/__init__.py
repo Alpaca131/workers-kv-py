@@ -1,6 +1,7 @@
 import json
 
 import requests
+from ext import *
 
 
 class Namespace:
