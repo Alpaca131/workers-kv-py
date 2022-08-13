@@ -1,4 +1,5 @@
 import json
+import warnings
 
 from . import aio_request
 
@@ -59,7 +60,7 @@ class Namespace:
         if len(key_value_pairs) == 1:
             await self._write_one(key_value_pairs)
         else:
-            await self._write_multiple(key_value_pairs)
+            await self._write_many(key_value_pairs)
         return None
 
     async def delete_one(self, key: str):
@@ -74,6 +75,11 @@ class Namespace:
         return None
 
     async def delete_multiple(self, keys: list):
+        warnings.warn("delete_multiple() is deprecated and should be removed in version 2.0. Use delete_many() instead.",
+                      DeprecationWarning)
+        return await self.delete_many(keys)
+
+    async def delete_many(self, keys: list):
         """
         Delete multiple key-value pairs from the namespace
         """
@@ -98,7 +104,7 @@ class Namespace:
             raise Exception(response_json["errors"])
         return None
 
-    async def _write_multiple(self, key_value_pairs: dict):
+    async def _write_many(self, key_value_pairs: dict):
         if len(key_value_pairs) > 10000:
             raise Exception("Too many key-value pairs. "
                             "See https://api.cloudflare.com/#workers-kv-namespace-write-multiple-key-value-pairs "
