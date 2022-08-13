@@ -55,6 +55,8 @@ class Namespace:
         except json.JSONDecodeError:
             # 正常時
             return response.content.decode()
+        if not isinstance(res_body, dict):
+            return res_body
         # エラー発生時
         if "errors" in res_body:
             raise Exception(res_body["errors"][0]["message"])
