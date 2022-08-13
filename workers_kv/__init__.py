@@ -20,6 +20,9 @@ class Namespace:
     def list_keys(self):
         """
         List all keys in the namespace
+
+        Returns:
+            keys (list): list of keys in the namespace
         """
         url = f"{self.request_base_url}/keys"
         response = requests.get(url, headers=self.request_headers)
@@ -38,6 +41,12 @@ class Namespace:
         """
         Read a key-value pair from the namespace
         If value is a json object, returns dict or list.
+
+        Args:
+            key (str): key to be read
+
+        Returns:
+            value (str or dict or list): value of the key
         """
         url = f"{self.request_base_url}/values/{key}"
         response = requests.get(url, headers=self.request_headers)
@@ -55,6 +64,12 @@ class Namespace:
     def write(self, key_value_pairs: dict):
         """
         Insert a key-value pair(s) into the namespace
+
+        Args:
+            key_value_pairs (dict): key-value pair(s) to be inserted
+
+        Returns:
+            None
         """
         if len(key_value_pairs) == 1:
             self._write_one(key_value_pairs)
@@ -65,6 +80,12 @@ class Namespace:
     def delete_one(self, key: str):
         """
         Delete a key-value pair from the namespace
+
+        Args:
+            key (str): key to be deleted
+
+        Returns:
+            None
         """
         url = f"{self.request_base_url}/values/{key}"
         response = requests.delete(url, headers=self.request_headers)
@@ -80,6 +101,12 @@ class Namespace:
     def delete_many(self, keys: list):
         """
         Delete multiple key-value pairs from the namespace
+
+        Args:
+            keys (list): list of keys to be deleted
+
+        Returns:
+            None
         """
         if len(keys) > 10000:
             raise Exception("Too many keys to delete")
