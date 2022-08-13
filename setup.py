@@ -6,9 +6,9 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setuptools.setup(
     name="workers-kv.py",
-    version="1.2.0",
+    version="1.2.1",
     author="Alpaca131",
-    author_email="iwa124816@gmail.com",
+    author_email="contact@alpaca131.com",
     description="An api wrapper of Cloudflare Workers KV for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
