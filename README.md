@@ -30,7 +30,6 @@ namespace.delete_one("key1")
 namespace.delete_many(["key1", "key2"])
 ```
 
-```
 
 ## Installation
 `pip install -U git+https://github.com/Alpaca131/workers-kv-py.git`
