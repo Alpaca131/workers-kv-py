@@ -145,7 +145,7 @@ class Namespace:
         url = f"{self.request_base_url}/bulk"
         data = []
         for key in key_value_pairs:
-            data.append({"key": str(key), "value": key_value_pairs[key]})
+            data.append({"key": str(key), "value": json.dumps(key_value_pairs[key])})
         response = await aio_request.put(url,
                                          headers=self.request_headers,
                                          data=data
