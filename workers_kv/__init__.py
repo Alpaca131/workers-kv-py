@@ -41,6 +41,7 @@ class Namespace:
         """
         Read a key-value pair from the namespace
         If value is a json object, returns dict or list.
+        If nothing matches, returns None.
 
         Args:
             key (str): key to be read
@@ -50,6 +51,8 @@ class Namespace:
         """
         url = f"{self.request_base_url}/values/{key}"
         response = requests.get(url, headers=self.request_headers)
+        if response.status_code == 404:
+            return None
         try:
             res_body = response.json()
         except json.JSONDecodeError:
@@ -112,6 +115,7 @@ class Namespace:
         """
         if len(keys) > 10000:
             raise Exception("Too many keys to delete")
+        keys = [str(key) for key in keys]
         url = f"{self.request_base_url}/bulk"
         response = requests.delete(url, headers=self.request_headers, json=keys)
         if response.json().get("success") is not True:
@@ -137,7 +141,7 @@ class Namespace:
         url = f"{self.request_base_url}/bulk"
         data = []
         for key in key_value_pairs:
-            data.append({"key": key, "value": key_value_pairs[key]})
+            data.append({"key": str(key), "value": key_value_pairs[key]})
         response = requests.put(url,
                                 headers=self.request_headers,
                                 json=data
